@@ -1,0 +1,9 @@
+Royal Blue	#207bea	Primary
+Ebony Clay	#222c3b	Info
+Ocean Green	#3f9f7e	Success
+Tussock	#bc8f46	Warning
+Pomegranate	#f44336	Danger
+
+Font Poppins
+
+npx create-react-app cashnote --template typescript
