@@ -7,3 +7,10 @@ Pomegranate	#f44336	Danger
 Font Poppins
 
 npx create-react-app cashnote --template typescript
+
+
+TODO:
+search work with ens
+share button
+react router
+design work

@@ -3,17 +3,26 @@ import "./App.css"
 import NavBar from "./components/NavBar";
 import SendCard from "./components/SendCard";
 import ViewCard from "./components/ViewCard";
-import { useState } from "react";
+import {
+  BrowserRouter, Routes, Route
+} from "react-router-dom";
 
 
 function App() {
-  const [appView, setAppView] = useState("send");
   return (
-    <div className=" bg-blue h-full float-left w-full flex flex-col"> 
-      {/* NavBar */}
-      <NavBar appView={appView} setAppView={setAppView}/>
+    <div className="flex flex-col float-left w-full h-full bg-blue"> 
       {/* body */}
-      {appView === "send" ? <SendCard /> : <ViewCard />}
+      <BrowserRouter>
+      <NavBar />
+      <Routes>
+        <Route path="/">
+          <Route index={true} element={<SendCard/>} />
+          <Route path="send" element={<SendCard />} />
+          <Route path="view" element={<ViewCard />} />
+          <Route path="*" element={<ViewCard />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
       </div>
   );
 }
