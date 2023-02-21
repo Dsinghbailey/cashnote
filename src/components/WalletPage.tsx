@@ -25,9 +25,9 @@ export default function WalletPage(props: any) {
   useEffect(() => {
     if (
       isConnected &&
-      ["/view", "/view/undefined"].includes(searchPath as string)
+      ["", "undefined"].includes(searchPath as string)
     ) {
-      navigate(`/view/${wagmiAddress}`);
+      navigate(`/wallet/${wagmiAddress}`);
     }
   }, [searchPath, isConnected, navigate, wagmiAddress]);
 

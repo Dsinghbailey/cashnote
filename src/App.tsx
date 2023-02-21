@@ -33,19 +33,20 @@ function App() {
             </Routes>
           </>
         ) : (
+          <>
+          <NavBar />
           <Routes>
+            <Route path="txn/:searchPath" element={<TxnPage txnSent={false} />} />
             <Route
               path="*"
               element={
-                <>
-                  <NavBar />
                   <div className="pb-8 bg-blue-600">
                   <ConnectCard />
                   </div>
-                </>
-              }
+                }
             />
           </Routes>
+          </>
         )}
       </BrowserRouter>
     </div>
