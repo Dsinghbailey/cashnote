@@ -19,7 +19,6 @@ import { publicProvider } from "wagmi/providers/public";
 const { chains, provider } = configureChains(
   [mainnet, polygon, optimism, arbitrum],
   [
-    // alchemyProvider({ apiKey: process.env.ALCHEMY_ID }),
     publicProvider(),
   ]
 );
@@ -45,7 +44,7 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <div className=" bg-blue h-full float-left w-full flex flex-col">
+    <div className="flex flex-col float-left w-full h-full ">
       <WagmiConfig client={wagmiClient}>
         <RainbowKitProvider
           chains={chains}

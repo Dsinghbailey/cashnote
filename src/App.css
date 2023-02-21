@@ -1,20 +1,19 @@
 :root {
   --blue: #207bea;
-  --light-blue: #a2ccff;
   --black: #000;
   --grey-dark: #666666;
   --grey: #e0e0e0;
 }
 
 html{
-  background-color: var(--blue);
+  background-color: rgb(243 244 246 / 1);
 }
+
 
 .navbar__option {
   padding: 0;
-
   cursor: pointer;
-  color: var(--black);
+  color: white;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -30,12 +29,18 @@ html{
 }
 .navbar__option_span:hover {
   border-bottom: var(--grey) 2px solid;
- 
 }
 
 .navbar__option_span.active {
-  border-bottom: black 2px solid;
+  border-bottom: white 2px solid;
 
+}
+
+.navbar__option.mobile {
+  color: black
+}
+.navbar__option_span.active.mobile {
+  border-bottom: black 2px solid;
 }
 
 .navbar__option svg {
@@ -48,7 +53,7 @@ html{
 /* txn toggle */
 .txn_type_toggle{
   background: var(--grey);
-  border: var(--grey-dark) 1px solid;
+  border: var(--grey) 1px solid;
   border-radius: 6px;
   display: inline-flex;
   height: fit-content;
@@ -60,7 +65,8 @@ html{
   border-radius: 6px;
   font-weight: 700;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
 }
 .txn_type_toggle__option.active{
   background: white;

@@ -4,8 +4,9 @@ import { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import { useSigner, useAccount, useBalance } from "wagmi";
 import { Icon } from "@iconify/react";
+import Card from "./Card";
 
-export default function SendCard() {
+export default function SendPage() {
   const { isConnected, address } = useAccount();
   const [sendWallet, setSendWallet] = useState("");
   const [sendWalletValid, setSendWalletValid] = useState("");
@@ -52,6 +53,7 @@ export default function SendCard() {
     setSendAmountValid("");
     return;
   }
+  
   const amountTimer = setTimeout(() => {
     if (parseFloat(sendAmount) > parseFloat(String(balance?.formatted))) {
       setSendAmountValid("error");
@@ -97,7 +99,7 @@ export default function SendCard() {
   }
 
   return (
-    <div className="max-w-xl px-6 py-6 mx-auto my-12 bg-white border-4 border-solid rounded-lg md:my-16 lg:px-8 border-blue ">
+    <Card>
       <div className="flex flex-col flex-wrap content-center">
         <p className="pb-6 mt-2 text-2xl font-bold tracking-tight text-center text-gray-900 sm:2text-xl">
           Send eth with a note.
@@ -154,7 +156,7 @@ export default function SendCard() {
             {txStatus === "" && (
               <>
               <button
-                className="px-4 py-2 mb-2 text-xl font-bold text-white rounded bg-blue hover:bg-blue-700 disabled:opacity-50"
+                className="px-4 py-2 mb-2 text-xl font-bold text-white bg-blue-600 rounded hover:bg-blue-700 disabled:opacity-50"
                 disabled={!readyToSend}
                 onClick={sendTransaction}
               >
@@ -165,7 +167,7 @@ export default function SendCard() {
             )}
              {txStatus === "pending" && (
               <div
-                className="flex justify-center px-4 py-2 mb-2 text-xl font-bold text-white rounded bg-blue"
+                className="flex justify-center px-4 py-2 mb-2 text-xl font-bold text-white bg-blue-600 rounded"
               >
                 <Icon icon="tabler:loader-quarter" className="mr-2 text-2xl animate-spin" />
                 Pending... 
@@ -207,6 +209,6 @@ export default function SendCard() {
           </div>
         )}
       </div>
-    </div>
+    </Card>
   );
 }

@@ -1,10 +1,11 @@
 import React from "react";
-import Logo from "../assets/logo-no-text.png";
+import Logo from "../assets/logo-white-no-text.svg";
 import { Icon } from "@iconify/react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useMediaQuery } from "react-responsive";
 import { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useAccount } from "wagmi";
 
 export default function NavBar(props: any) {
   const isMobile = useMediaQuery({ query: `(max-width: 800px)` });
@@ -12,6 +13,7 @@ export default function NavBar(props: any) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
   let location = useLocation();
+  const {address: wagmiAddress} = useAccount();
 
   useEffect(() => {
     document.addEventListener("click", handleClickOutside, false);
@@ -27,9 +29,11 @@ export default function NavBar(props: any) {
   }
 
   return (
-    <div className="flex flex-row flex-wrap justify-between float-left w-full bg-white align-center">
+    <div className="flex flex-row flex-wrap justify-between float-left w-full bg-blue-600 border-blue-600 border-solid align-center border-1">
       <div className="inset-0 flex justify-start">
+        <a href="/">
         <img src={Logo} className="my-4 ml-6 h-11" alt="logo" />
+        </a>
       </div>
       {isMobile ? (
         <div className="contents" ref={menuRef}>
@@ -37,22 +41,22 @@ export default function NavBar(props: any) {
             <Icon
               icon="ci:hamburger"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className={`text-blue text-5xl my-auto mr-6 ${
+              className={`text-white text-5xl my-auto mr-6 ${
                 isMenuOpen ? "border-brown border" : ""
               }`}
             />
           </button>
           {isMenuOpen && (
-            <div className="absolute right-0 z-10 flex justify-end mt-[4.75em]">
+            <div className="absolute right-4 z-10 flex justify-end mt-[4.75em]">
               <ul className="px-4 bg-white border border-brown">
                 <li>
                   <div
-                    className={`navbar__option `}
+                    className={`navbar__option mobile`}
                     onClick={() => navigate("/send")}
                   >
                     <span
-                      className={`navbar__option_span ${
-                        location.pathname === "/send" ? "active" : ""
+                      className={`navbar__option_span mobile ${
+                        (location.pathname.includes('send') ||  ['/',''].includes(location.pathname)) ? "active" : ""
                       }`}
                     >
                       Send
@@ -61,15 +65,15 @@ export default function NavBar(props: any) {
                 </li>
                 <li className="mt-0">
                   <div
-                    className={`navbar__option `}
-                    onClick={() => navigate("/view")}
+                    className={`navbar__option mobile`}
+                    onClick={() => navigate("/wallet/" + wagmiAddress)}
                   >
                     <span
-                      className={`navbar__option_span ${
-                        location.pathname === "/view" ? "active" : ""
+                      className={`navbar__option_span mobile ${
+                        location.pathname.includes("wallet") ? "active" : ""
                       }`}
                     >
-                      View
+                      My Notes
                     </span>
                   </div>
                 </li>
@@ -93,7 +97,7 @@ export default function NavBar(props: any) {
             >
               <span
                 className={`navbar__option_span ${
-                  location.pathname === "/send" ? "active" : ""
+                  (location.pathname.includes('send') ||  ['/',''].includes(location.pathname)) ? "active" : ""
                 }`}
               >
                 Send
@@ -101,14 +105,14 @@ export default function NavBar(props: any) {
             </div>
             <div
               className={`navbar__option `}
-              onClick={() => navigate("/view")}
+              onClick={() => navigate("/wallet/" + wagmiAddress)}
             >
               <span
                 className={`navbar__option_span ${
-                  location.pathname === "/view" ? "active" : ""
+                  location.pathname.includes('wallet')  ? "active" : ""
                 }`}
               >
-                View
+                My Notes
               </span>
             </div>
           </div>

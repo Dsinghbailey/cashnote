@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useState, useEffect } from "react";
 import { Icon } from "@iconify/react";
 import { useAccount, useSigner } from "wagmi";
-import { ConnectButton, useConnectModal } from "@rainbow-me/rainbowkit";
+import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { ethers } from "ethers";
 import Web3 from "web3";
 import EtherscanLogo from "../assets/etherscan-logo-circle.svg";
+import { fetchTransaction } from '@wagmi/core'
+import { useParams } from 'react-router-dom';
+import { getEnsNames, shortenAddress } from "../utilities";
+
+
 const humanizeDuration = require("humanize-duration");
 
-export default function ViewCard() {
+export default function ViewCard(props: any) {
+  let { searchPath } = useParams(); 
   const { openConnectModal } = useConnectModal();
   const [viewWallet, setViewWallet] = useState("");
   const [rawTxData, setRawTxData] = useState<any>(null);
@@ -16,35 +22,34 @@ export default function ViewCard() {
   const { isConnected, address } = useAccount();
   const { data: signer } = useSigner();
   const [nameLookup, setNameLookup] = useState<any>({});
+  const [shareText, setShareText] = useState("share");
 
   // Notes only
   const [notesOnly, setNotesOnly] = useState(true);
-
-  // Shorten address
-  function shortenAddress(address: string) {
-    return address.slice(0, 5) + "..." + address.slice(-4);
-  }
 
   function isValidTxHash(addr: string) {
     return /^0x([A-Fa-f0-9]{64})$/.test(addr);
   }
   // Get Transaction Data
   // Use effect to get Transactions after user finishes typing
-  function searchNotes(searchterm = viewWallet) {
+  const searchNotes = useCallback((searchterm = viewWallet) => {
     console.log("searching: ", searchterm);
     if (searchterm === "") {
       return;
     }
     let url;
     if (isValidTxHash(searchterm)){
-      // TODO: Add txhash search
-      url = `http://api.etherscan.io/api?module=account&action=txlist&address=${searchterm}&sort=desc&apikey=GS9IU3D7AFKN9T8UQAEA7E4QM6PS7FKXQW`;
+      setNotesOnly(false); 
+      fetchTransaction({
+        hash: `0x${searchterm.slice(2)}`,
+      }).then((transaction) => {
+        console.log(transaction);
+        setRawTxData([transaction]);
+      });
     }
     else{
-      url = `http://api.etherscan.io/api?module=account&action=txlist&address=${searchterm}&sort=desc&apikey=GS9IU3D7AFKN9T8UQAEA7E4QM6PS7FKXQW`;
-    }
-
-    fetch(url)
+      url = `http://api.etherscan.io/api?module=account&action=txlist&address=${searchterm}&sort=desc&apikey=${process.env.REACT_APP_ETHERSCAN_KEY}`;
+      fetch(url)
       .then((response) => response.json())
       .then((data) => {
         if (Array.isArray(data.result)) {
@@ -56,7 +61,16 @@ export default function ViewCard() {
       .catch(() => {
         setTxData(null);
       });
-  }
+    }
+  }, [viewWallet]);
+
+  // use effect for navigating from url
+  useEffect(() => {
+    if (searchPath !== undefined) {
+      setViewWallet(searchPath);
+      searchNotes(searchPath);
+    }
+  }, [searchPath, searchNotes]);
 
   // Use effect to filter tx data
   useEffect(() => {
@@ -64,7 +78,6 @@ export default function ViewCard() {
       return;
     }
     let tempTxData = rawTxData;
-    console.log(tempTxData);
     if (notesOnly) {
       tempTxData = tempTxData
         .filter((tx: any) => tx.input !== "0x")
@@ -87,14 +100,10 @@ export default function ViewCard() {
       });
       const addresses = Array.from(addressesSet);
       // Get ENS names from addresses
-      const ensContractAddress = "0x3671aE578E63FdF66ad4F3E12CC0c0d71Ac7510C";
-      const ensAbi = `[{"inputs":[{"internalType":"contract ENS","name":"_ens","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"address[]","name":"addresses","type":"address[]"}],"name":"getNames","outputs":[{"internalType":"string[]","name":"r","type":"string[]"}],"stateMutability":"view","type":"function"}]`;
-      const reverseRecords = new ethers.Contract(
-        ensContractAddress,
-        ensAbi,
-        signer
-      );
-      const ensNames = await reverseRecords.getNames(addresses);
+      const ensNames = await getEnsNames(signer, addresses);
+      if (ensNames === null) {
+        return;
+      }
       let tempNameLookup: { [key: string]: string } = {};
       addresses.forEach(function (address: any, index: number) {
         const addressStr: string = address.toString();
@@ -111,8 +120,17 @@ export default function ViewCard() {
     init();
   }, [txData, signer]);
 
+  // copy to clipboard
+  function copyToClipboard(text: string) {
+    navigator.clipboard.writeText('https://cashnote.xyz/view/' + text);
+    setShareText("copied to clipboard");
+    setTimeout(() => {
+      setShareText("share");
+    }, 1500);
+  }
+
   return (
-    <div className="bg-white py-6 my-12 md:my-16 mx-auto max-w-xl px-6 lg:px-8 border-solid border-4 border-blue rounded-lg min-w-[350px] flex flex-col">
+    <div className="bg-white py-6 my-12 md:my-16 mx-auto max-w-xl px-6 lg:px-8 border-solid border-4 border-blue-600 rounded-lg min-w-[350px] flex flex-col">
       <p className="pb-4 mt-2 text-2xl font-bold tracking-tight text-center text-gray-900 sm:2text-xl">
         View notes by wallet or transaction.
       </p>
@@ -131,7 +149,7 @@ export default function ViewCard() {
         </div>
         <div className="flex justify-center mb-12">
           <button
-            className="px-4 py-2 font-bold text-white rounded text-md bg-blue hover:bg-blue-dark "
+            className="px-4 py-2 font-bold text-white bg-blue-600 rounded text-md hover:bg-blue-700 "
             onClick={() => searchNotes()}
           >
             Search
@@ -212,15 +230,18 @@ export default function ViewCard() {
                 >
                   {cleanInput}
                 </div>
-                <div className="px-4 pb-3 text-sm">
+                <div className="flex px-4 pb-3 align-middle">
                   <a
-                    className="underline cursor-pointer text-blue"
+                    className="mt-1 cursor-pointer"
                     target="_blank"
                     rel="noreferrer"
                     href={`https://etherscan.io/tx/${tx.hash}`}
                   >
                     <img src={EtherscanLogo} className="h-4" alt="Etherscan" />
                   </a>
+                  <button className="px-2 py-1 mx-2 text-xs border-solid text-grey-dark hover:text-black"
+                  onClick={() => copyToClipboard(tx.hash)}
+                  > [{shareText}]</button>
                 </div>
               </div>
             );
