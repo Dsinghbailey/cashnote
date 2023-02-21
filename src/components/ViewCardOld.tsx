@@ -48,7 +48,7 @@ export default function ViewCard(props: any) {
       });
     }
     else{
-      url = `http://api.etherscan.io/api?module=account&action=txlist&address=${searchterm}&sort=desc&apikey=${process.env.REACT_APP_ETHERSCAN_KEY}`;
+      url = `https://api.etherscan.io/api?module=account&action=txlist&address=${searchterm}&sort=desc&apikey=${process.env.REACT_APP_ETHERSCAN_KEY}`;
       fetch(url)
       .then((response) => response.json())
       .then((data) => {

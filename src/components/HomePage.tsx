@@ -21,7 +21,7 @@ export default function HomePage() {
 
   useEffect(() => {
       if (isConnected && signer) {
-        const url = `http://api.etherscan.io/api?module=account&action=txlist&address=${wagmiAdress}&sort=desc&apikey=${process.env.REACT_APP_ETHERSCAN_KEY}`;
+        const url = `https://api.etherscan.io/api?module=account&action=txlist&address=${wagmiAdress}&sort=desc&apikey=${process.env.REACT_APP_ETHERSCAN_KEY}`;
         fetch(url)
           .then((response) => response.json())
           .then(async (data) => {

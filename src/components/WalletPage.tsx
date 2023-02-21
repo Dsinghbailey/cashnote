@@ -61,7 +61,7 @@ export default function WalletPage(props: any) {
       });
     } else {
       console.log("getting tx data for: ", viewWallet);
-      url = `http://api.etherscan.io/api?module=account&action=txlist&address=${searchterm}&sort=desc&apikey=${process.env.REACT_APP_ETHERSCAN_KEY}&limit=100`;
+      url = `https://api.etherscan.io/api?module=account&action=txlist&address=${searchterm}&sort=desc&apikey=${process.env.REACT_APP_ETHERSCAN_KEY}&limit=100`;
       console.log(url);
       fetch(url)
         .then((response) => response.json())
