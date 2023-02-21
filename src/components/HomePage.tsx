@@ -28,7 +28,7 @@ export default function HomePage() {
             if (Array.isArray(data.result)) {
               // Get addresses from data.result and the most recent timestamp
               let addressesObj: any = {};
-              const tempTxns = data.result.slice(0, 1000);
+              const tempTxns = data.result.slice(0, 1000).filter((tx: any) => tx.functionName === "");
               tempTxns.forEach((tx: any) => {
                 if (!(tx.from in addressesObj)) {
                   addressesObj[tx.from] = tx.timeStamp;
