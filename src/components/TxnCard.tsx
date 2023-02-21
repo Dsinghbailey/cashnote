@@ -5,7 +5,6 @@ import Web3 from "web3";
 import EtherscanLogo from "../assets/etherscan-logo-circle.svg";
 import { ethers } from "ethers";
 import { shortenAddress } from "../utilities";
-import { createClient } from "@supabase/supabase-js";
 
 const humanizeDuration = require("humanize-duration");
 
@@ -29,15 +28,6 @@ export default function TxnCard(props: any) {
     setTimeout(() => {
       setShareText("share");
     }, 1500);
-  }
-
-  async function sendtoSupaBase(){
-    const supabase = createClient(
-      process.env.REACT_APP_SUPABASE_URL as string,
-      process.env.REACT_APP_SUPABASE_KEY as string
-    );
-    const { error } = await supabase.from("sent_transaction").insert({ tx_hash: props.tx.hash, tx_data: JSON.stringify(props.tx), tx_amount: ethers.utils.formatEther(props.tx.value), tx_to:props.tx.to, tx_from:props.tx.from, tx_note: cleanInput });
-    console.log(error)
   }
 
   return (
@@ -82,13 +72,6 @@ export default function TxnCard(props: any) {
           >
             {" "}
             [{shareText}]
-          </button>
-          <button
-            className="px-2 py-1 mx-2 text-xs text-gray-600 border-solid hover:text-black"
-            onClick={() => sendtoSupaBase()}
-          >
-            {" "}
-            [supabase]
           </button>
         </div>
       </Card>

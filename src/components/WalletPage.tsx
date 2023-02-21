@@ -185,7 +185,6 @@ export default function WalletPage(props: any) {
         </div>
         {txData &&
           txData.map((tx: any) => {
-            console.log(tx, nameLookup);
             return (
               <div key={tx.hash}>
                 <TxnCard tx={tx} nameLookup={nameLookup} />

@@ -15,7 +15,6 @@ export default function SendingPage() {
   const { searchPath } = useParams();
   const { address } = useAccount();
   const [sendWallet, setSendWallet] = useState("");
-  const [sendWalletValid, setSendWalletValid] = useState("");
 
   const [userName, setUserName] = useState(
     shortenAddress(searchPath as string)
@@ -37,7 +36,6 @@ export default function SendingPage() {
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         if (data?.address) {
           setSendWallet(data?.address);
           setUserName(data?.displayName);
@@ -46,7 +44,7 @@ export default function SendingPage() {
         }
       })
       .catch(() => {
-        setSendWalletValid("error");
+        setUserName("error");
       });
   }, [searchPath]);
 
@@ -81,13 +79,37 @@ export default function SendingPage() {
         console.log(tx);
         setTxStatus("success");
         setTxHash(tx?.hash);
-        setSentTx(tx)
+        setSentTx(tx);
       })
       .catch((error: any) => {
         console.log(error);
         setTxStatus("error");
       });
   }
+   // if transaction was a success show the success page
+   useEffect(() => {
+    if (txStatus === "success") {
+      // Send Logs to supabase
+      const supabase = createClient(
+        process.env.REACT_APP_SUPABASE_URL as string,
+        process.env.REACT_APP_SUPABASE_KEY as string
+      );
+      supabase
+        .from("sent_transaction")
+        .insert({
+          tx_hash: txHash,
+          tx_data: JSON.stringify(sentTx),
+          tx_amount: sendAmount,
+          tx_to: sendWallet,
+          tx_from: address,
+          tx_note: sendNote,
+        })
+        .then(() => {
+          navigate(`/txn/${txHash}/sent`);
+        });
+    }
+  }, [txStatus, txHash, sentTx, sendAmount, sendWallet, address, sendNote]);
+
 
   // If there is an error with the entered address don't show the form
   if (userName === "error") {
@@ -105,19 +127,7 @@ export default function SendingPage() {
       </div>
     );
   }
-  // if transaction was a success show the success page
-  if (txStatus === "success") {
-    // Send Logs to supabase
-    const supabase = createClient(
-      process.env.REACT_APP_SUPABASE_URL as string,
-      process.env.REACT_APP_SUPABASE_KEY as string
-    );
-    supabase.from("sent_transaction").insert({ tx_hash: txHash, tx_data: JSON.stringify(sentTx), tx_amount: sendAmount });
-
-    navigate(`/txn/${txHash}/sent`);
-    return <></>;
-  }
-
+  
   return (
     <>
       <div className="flex flex-wrap content-start justify-center mt-8 mb-4">

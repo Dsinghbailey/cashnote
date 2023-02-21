@@ -34,7 +34,11 @@ export default function SearchCard(props: any) {
       });
   }
   
-
+  const handleKeyDown = (event: any) => {
+    if (event.key === "Enter") {
+      clickSend();
+    }
+  };
   return (
     <Card>
       <div className="flex flex-col items-center justify-center w-full h-full">
@@ -51,6 +55,7 @@ export default function SearchCard(props: any) {
             onChange={(e) => {
               setSendWalletError(false);
               setSendWallet(e.target.value)}}
+            onKeyDown={handleKeyDown}
           />
           <button
             className="absolute z-10 px-2 py-1 mb-2 text-lg font-bold text-white bg-blue-600 right-1 top-1 rounded-3xl hover:bg-blue-700 disabled:opacity-50"
