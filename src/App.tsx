@@ -39,7 +39,7 @@ function App() {
               element={
                 <>
                   <NavBar />
-                  <div className="bg-blue-600">
+                  <div className="pb-8 bg-blue-600">
                   <ConnectCard />
                   </div>
                 </>

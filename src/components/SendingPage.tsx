@@ -208,7 +208,7 @@ export default function SendingPage() {
                   Try Again
                 </div>
                 <span className="text-sm italic text-center">
-                  There was a transaction errror. Please try again
+                  There was a transaction error. Please try again
                 </span>
               </>
             )}

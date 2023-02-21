@@ -64,7 +64,6 @@ export default function HomePage() {
           .catch(() => {
             setFriends([]);
           });
-
       }
   }, [isConnected, signer, wagmiAdress]);
   
