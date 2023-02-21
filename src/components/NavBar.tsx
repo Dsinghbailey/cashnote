@@ -70,7 +70,7 @@ export default function NavBar(props: any) {
                   >
                     <span
                       className={`navbar__option_span mobile ${
-                        location.pathname.includes("wallet") ? "active" : ""
+                        (location.pathname === "/wallet/" + wagmiAddress) ? "active" : ""
                       }`}
                     >
                       My Notes
@@ -109,7 +109,7 @@ export default function NavBar(props: any) {
             >
               <span
                 className={`navbar__option_span ${
-                  location.pathname.includes('wallet')  ? "active" : ""
+                  (location.pathname === "/wallet/" + wagmiAddress) ? "active" : ""
                 }`}
               >
                 My Notes
