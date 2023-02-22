@@ -19,13 +19,13 @@ export default function FriendCard(props: any) {
             <Avatar wallet={props.address} />
           </div>
           <div className="flex flex-col justify-center h-full">
-            <button className="px-6 py-1 mb-2 text-lg font-bold text-white bg-blue-600 rounded right-1 top-1 hover:bg-blue-700 disabled:opacity-50"
+            <button className="px-6 py-1 mb-2 text-lg font-bold text-white bg-blue-600 rounded-lg right-1 top-1 hover:bg-blue-700 disabled:opacity-50"
                         onClick={() => navigate("/send/" + props.address)}
             >
               Send
             </button>
             <button 
-            className="px-6 py-1 text-lg font-bold text-blue-600 bg-gray-200 border-blue-600 rounded right-1 top-1 hover:bg-gray-300 disabled:opacity-50 border-1"
+            className="px-6 py-1 text-lg font-bold text-blue-600 bg-gray-100 border-blue-600 rounded-lg right-1 top-1 hover:bg-gray-200 disabled:opacity-50 border-1"
             onClick={() => navigate("/wallet/" + props.address)}
             >
               View

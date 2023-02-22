@@ -25,6 +25,7 @@ export default function HomePage() {
         fetch(url)
           .then((response) => response.json())
           .then(async (data) => {
+            console.log(data)
             if (Array.isArray(data.result)) {
               // Get addresses from data.result and the most recent timestamp
               let addressesObj: any = {};

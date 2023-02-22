@@ -131,7 +131,7 @@ export default function WalletPage(props: any) {
       <div className="pb-4 bg-blue-600">
         <Card>
           <div className="flex flex-col items-center justify-center w-full">
-            <p className="text-2xl font-bold">
+            <p className="text-2xl font-bold text-center">
               {" "}
               {Object.keys(nameLookup).length > 0
                 ? nameLookup[(viewWallet as string).toLowerCase()]

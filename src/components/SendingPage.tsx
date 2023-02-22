@@ -141,7 +141,6 @@ export default function SendingPage() {
             Sending to <br />
             <a href={`/wallet/${searchPath}`} className="appearance-none cursor-pointer"> {userName} </a>
           </p>
-
         </div>
       </div>
       <div className="flex justify-center">
@@ -178,7 +177,7 @@ export default function SendingPage() {
             {txStatus === "" && (
               <>
                 <button
-                  className="px-4 py-2 mb-2 text-xl font-bold text-white bg-blue-600 rounded hover:bg-blue-700 disabled:opacity-50"
+                  className="px-4 py-2 mb-2 text-xl font-bold text-white bg-blue-600 rounded-lg hover:bg-blue-700 disabled:opacity-50"
                   onClick={sendTransaction}
                 >
                   Send
