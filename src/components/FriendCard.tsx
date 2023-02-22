@@ -13,6 +13,7 @@ export default function FriendCard(props: any) {
       <div className="flex flex-col items-center justify-center w-full h-full">
         <div className="flex flex-row items-center justify-between w-full h-full">
           <div 
+          className="cursor-pointer"
            onClick={() => navigate("/wallet/" + props.address)}
           >
             <Avatar wallet={props.address} />

@@ -9,7 +9,6 @@ import Card from "./Card";
 import TxnCard from "./TxnCard";
 import Avatar from "./Avatar";
 
-
 export default function WalletPage(props: any) {
   let { viewWallet } = useParams();
   const navigate = useNavigate();
@@ -21,7 +20,6 @@ export default function WalletPage(props: any) {
   // Notes only toggle
   const [notesOnly, setNotesOnly] = useState(true);
 
-
   // fix for when wallet is undefined (happens right after user connects on view page)
   useEffect(() => {
     if (
@@ -31,7 +29,6 @@ export default function WalletPage(props: any) {
       navigate(`/wallet/${wagmiAddress}`);
     }
   }, [viewWallet, isConnected, navigate, wagmiAddress]);
-
 
   // helper to check whether valid transaction
   function isValidTxHash(addr: string) {
@@ -138,12 +135,13 @@ export default function WalletPage(props: any) {
               {" "}
               {Object.keys(nameLookup).length > 0
                 ? nameLookup[(viewWallet as string).toLowerCase()]
-                : shortenAddress((viewWallet as string))}
+                : shortenAddress(viewWallet as string)}
             </p>
             <p className="mb-4 text-xs text-gray-400 ">{viewWallet}</p>
-                <Avatar wallet={viewWallet}/>
+
+            <Avatar wallet={viewWallet} />
             <button
-              className="px-6 py-1 mt-4 text-lg font-bold text-white bg-blue-600 rounded right-1 top-1 hover:bg-blue-700 disabled:opacity-50"
+              className="px-6 py-1 mt-6 text-lg font-bold text-white bg-blue-600 rounded right-1 top-1 hover:bg-blue-700 disabled:opacity-50"
               onClick={() => navigate("/send/" + viewWallet)}
             >
               Send Eth
