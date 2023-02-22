@@ -34,7 +34,9 @@ export default function TxnCard(props: any) {
       <Card>
         <div className="flex flex-wrap text-lg break-word [overflow-wrap:break-word]">
           <a href={'/wallet/' + props.tx.from} className="font-semibold appearance-none">{props.nameLookup[props.tx.from] || shortenAddress(props.tx.from)}</a>
-          <span>&nbsp; paid &nbsp;</span>
+          &nbsp;
+          <span>paid</span>
+          &nbsp;
           <a href={'/wallet/' + props.tx.to} className="font-semibold">{props.nameLookup[props.tx.to] || shortenAddress(props.tx.to)}</a>
         </div>
         <div className="text-base text-gray-600 break-word">
@@ -58,8 +60,9 @@ export default function TxnCard(props: any) {
           {cleanInput || "Empty Transaction"}
         </div>
         <div className="flex align-middle">
+
           <a
-            className="mt-1 cursor-pointer"
+            className="mt-[5px] cursor-pointer"
             target="_blank"
             rel="noreferrer"
             href={`https://etherscan.io/tx/${props.tx.hash}`}
@@ -67,7 +70,7 @@ export default function TxnCard(props: any) {
             <img src={EtherscanLogo} className="h-4" alt="Etherscan" />
           </a>
           <button
-            className="px-2 py-1 mx-2 text-xs text-gray-600 border-solid hover:text-black"
+            className="py-1 ml-4 text-xs text-blue-600 border-solid hover:text-blue-700"
             onClick={() => copyToClipboard(props.tx.hash)}
           >
             {" "}
