@@ -141,10 +141,10 @@ export default function WalletPage(props: any) {
 
             <Avatar wallet={viewWallet} />
             <button
-              className="px-6 py-1 mt-6 text-lg font-bold text-white bg-blue-600 rounded right-1 top-1 hover:bg-blue-700 disabled:opacity-50"
+              className="px-6 py-1 mt-6 text-lg font-bold text-white bg-blue-600 rounded-lg right-1 top-1 hover:bg-blue-700 disabled:opacity-50"
               onClick={() => navigate("/send/" + viewWallet)}
             >
-              Send Eth
+              Send
             </button>
           </div>
         </Card>

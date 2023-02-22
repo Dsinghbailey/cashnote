@@ -6,9 +6,9 @@ import { useSigner, useAccount, useBalance } from "wagmi";
 import { Icon } from "@iconify/react";
 import SmallCard from "./SmallCard";
 import { useNavigate, useParams } from "react-router-dom";
-import Blockies from "react-blockies";
 import { shortenAddress } from "../utilities";
 import { createClient } from "@supabase/supabase-js";
+import Avatar from "./Avatar";
 
 export default function SendingPage() {
   const navigate = useNavigate();
@@ -132,17 +132,16 @@ export default function SendingPage() {
     <>
       <div className="flex flex-wrap content-start justify-center mt-8 mb-4">
         <div className="flex items-center overflow-auto rounded-xl">
-          <Blockies
-            seed={String(searchPath).toLowerCase()}
-            scale={8}
-            size={8}
-          />
+        <a href={`/wallet/${searchPath}`} className="appearance-none cursor-pointer">
+          <Avatar wallet={searchPath} />
+          </a>
         </div>
         <div className="ml-4">
           <p className="text-2xl font-bold text-left">
             Sending to <br />
-            {userName}
+            <a href={`/wallet/${searchPath}`} className="appearance-none cursor-pointer"> {userName} </a>
           </p>
+
         </div>
       </div>
       <div className="flex justify-center">

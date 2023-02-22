@@ -32,12 +32,12 @@ export default function TxnCard(props: any) {
 
   return (
       <Card>
-        <div className="flex flex-wrap text-lg break-all">
+        <div className="flex flex-wrap text-lg break-word [overflow-wrap:break-word]">
           <a href={'/wallet/' + props.tx.from} className="font-semibold appearance-none">{props.nameLookup[props.tx.from] || shortenAddress(props.tx.from)}</a>
           <span>&nbsp; paid &nbsp;</span>
           <a href={'/wallet/' + props.tx.to} className="font-semibold">{props.nameLookup[props.tx.to] || shortenAddress(props.tx.to)}</a>
         </div>
-        <div className="text-base text-gray-600 break-all">
+        <div className="text-base text-gray-600 break-word">
           {ethers.utils.formatEther(props.tx.value).slice(0, 8)} Eth -{" "}
           {humanizeDuration(
             (new Date().getTime() / 1000 - props.tx.timeStamp) * 1000,
@@ -49,7 +49,7 @@ export default function TxnCard(props: any) {
           ago
         </div>
         <div
-          className={`pt-3 pb-4 text-lg break-all ${
+          className={`pt-3 pb-4 text-lg break-word [overflow-wrap:break-word] ${
             (props.tx.functionName && props.tx.functionName !== "") || cleanInput === ""
               ? "italic text-gray-300"
               : ""

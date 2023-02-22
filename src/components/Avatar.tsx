@@ -19,7 +19,7 @@ export default function Avatar(props: any) {
       imgError ? (
         <div className="flex items-center overflow-auto rounded-xl">
           <Blockies
-            seed={(props.wallet as string).toLowerCase()}
+            seed={(props.wallet as string)?.toLowerCase()}
             scale={11}
             size={8}
           />
