@@ -48,8 +48,8 @@ export default function SearchCard(props: any) {
     <Card>
       <div className="flex flex-col items-center justify-center w-full h-full">
         <p className="pb-4 mt-2 text-2xl font-bold tracking-tight text-center text-gray-900">
-          Send eth with a note <br />
-          on the blockchain.
+          Social Payments <br />
+          on the Blockchain.
         </p>
         <div className="flex flex-col justify-start">
           <div className="h-12">

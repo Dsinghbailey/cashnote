@@ -73,7 +73,7 @@ export default function HomePage() {
       <div className="pt-4 pb-8 bg-blue-600">
         <SearchCard />
       </div>
-      <div className="pt-4 bg-gray-100">
+      <div className="pt-4">
         <p className="my-2 text-2xl font-bold tracking-tight text-center text-gray-700">
           Your Friends
         </p>

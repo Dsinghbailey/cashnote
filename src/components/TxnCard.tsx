@@ -38,7 +38,7 @@ export default function TxnCard(props: any) {
           <a href={'/wallet/' + props.tx.to} className="font-semibold">{props.nameLookup[props.tx.to] || shortenAddress(props.tx.to)}</a>
         </div>
         <div className="text-base text-gray-600 break-word">
-          {ethers.utils.formatEther(props.tx.value).slice(0, 8)} Eth -{" "}
+          {Number.parseFloat(ethers.utils.formatEther(props.tx.value).slice(0, 8))} Eth -{" "}
           {humanizeDuration(
             (new Date().getTime() / 1000 - props.tx.timeStamp) * 1000,
             {

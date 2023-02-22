@@ -4,11 +4,10 @@ import NavBar from "./components/NavBar";
 import WalletPage from "./components/WalletPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useAccount } from "wagmi";
-import ConnectCard from "./components/ConnectCard";
+import ConnectPage from "./components/ConnectPage";
 import HomePage from "./components/HomePage";
 import SendingPage from "./components/SendingPage";
 import TxnPage from "./components/TxnPage";
-
 
 function App() {
   const { isConnected, address } = useAccount();
@@ -26,26 +25,30 @@ function App() {
                 <Route path="send" element={<HomePage />} />
                 <Route path="send/:searchPath" element={<SendingPage />} />
                 <Route path="wallet/:viewWallet" element={<WalletPage />} />
-                <Route path="txn/:searchPath/sent" element={<TxnPage txnSent={true} />} />
-                <Route path="txn/:searchPath" element={<TxnPage txnSent={false} />} />
+                <Route
+                  path="txn/:searchPath/sent"
+                  element={<TxnPage txnSent={true} />}
+                />
+                <Route
+                  path="txn/:searchPath"
+                  element={<TxnPage txnSent={false} />}
+                />
                 <Route path="*" element={<HomePage />} />
               </Route>
             </Routes>
           </>
         ) : (
           <>
-          <NavBar />
-          <Routes>
-            <Route path="txn/:searchPath" element={<TxnPage txnSent={false} />} />
-            <Route
-              path="*"
-              element={
-                  <div className="pb-8 bg-blue-600">
-                  <ConnectCard />
-                  </div>
-                }
-            />
-          </Routes>
+            <NavBar />
+            <Routes>
+              <Route
+                path="txn/:searchPath"
+                element={<TxnPage txnSent={false} />}
+              />
+              <Route path="/wallet/undefined" element={<ConnectPage />} />
+              <Route path="wallet/:viewWallet" element={<WalletPage />} />
+              <Route path="*" element={<ConnectPage />} />
+            </Routes>
           </>
         )}
       </BrowserRouter>
