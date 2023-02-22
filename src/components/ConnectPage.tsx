@@ -34,27 +34,23 @@ export default function ConnectPage(props: any) {
           Connect Your Wallet to See Your{" "}
           {location && ["/send", "/"].includes(location) ? "Friends" : "Notes"}
         </p>
-        {location && ["/send", "/"].includes(location)
-          ? 
+        {location && ["/send", "/"].includes(location) ? (
           <div className="flex flex-wrap justify-center">
-          {Array.from(Array(10).keys()).map((_: any) => (
-              
-                <SmallCard>
-                  <div className="h-24 mx-auto my-4 italic text-center"></div>
-                </SmallCard>
-
+            {Array.from(Array(10).keys()).map((_: any) => (
+              <SmallCard>
+                <div className="h-24 mx-auto my-4 italic text-center"></div>
+              </SmallCard>
             ))}
-            </div>
-          : <div className="flex flex-col items-center">
-          {Array.from(Array(10).keys()).map((_: any) => (
-              
-                <Card>
-                  <div className="h-24 mx-auto my-4 italic text-center"></div>
-                </Card>
-
+          </div>
+        ) : (
+          <div className="flex flex-col items-center">
+            {Array.from(Array(10).keys()).map((_: any) => (
+              <Card>
+                <div className="h-24 mx-auto my-4 italic text-center"></div>
+              </Card>
             ))}
-            </div>
-            }
+          </div>
+        )}
       </div>
     </>
   );
