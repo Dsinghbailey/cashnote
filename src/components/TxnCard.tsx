@@ -35,7 +35,7 @@ export default function TxnCard(props: any) {
         <div className="flex flex-wrap text-lg break-all">
           <a href={'/wallet/' + props.tx.from} className="font-semibold appearance-none">{props.nameLookup[props.tx.from] || shortenAddress(props.tx.from)}</a>
           <span>&nbsp; paid &nbsp;</span>
-          <a href={'/wallet/' + props.tx.from} className="font-semibold">{props.nameLookup[props.tx.to] || shortenAddress(props.tx.to)}</a>
+          <a href={'/wallet/' + props.tx.to} className="font-semibold">{props.nameLookup[props.tx.to] || shortenAddress(props.tx.to)}</a>
         </div>
         <div className="text-base text-gray-600 break-all">
           {ethers.utils.formatEther(props.tx.value).slice(0, 8)} Eth -{" "}
