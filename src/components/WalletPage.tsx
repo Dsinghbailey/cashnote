@@ -6,13 +6,13 @@ import { fetchTransaction } from "@wagmi/core";
 import { useParams, useNavigate } from "react-router-dom";
 import { getEnsNames, shortenAddress } from "../utilities";
 import Card from "./Card";
-import Blockies from "react-blockies";
 import TxnCard from "./TxnCard";
+import Avatar from "./Avatar";
+
 
 export default function WalletPage(props: any) {
-  let { searchPath } = useParams();
+  let { viewWallet } = useParams();
   const navigate = useNavigate();
-  const [viewWallet, setViewWallet] = useState("");
   const [rawTxData, setRawTxData] = useState<any>(null);
   const [txData, setTxData] = useState<any>(null);
   const { address: wagmiAddress, isConnected } = useAccount();
@@ -21,22 +21,17 @@ export default function WalletPage(props: any) {
   // Notes only toggle
   const [notesOnly, setNotesOnly] = useState(true);
 
+
   // fix for when wallet is undefined (happens right after user connects on view page)
   useEffect(() => {
     if (
       isConnected &&
-      ["", "undefined"].includes(searchPath as string)
+      ["", "undefined", undefined].includes(viewWallet as string)
     ) {
       navigate(`/wallet/${wagmiAddress}`);
     }
-  }, [searchPath, isConnected, navigate, wagmiAddress]);
+  }, [viewWallet, isConnected, navigate, wagmiAddress]);
 
-  // use effect for navigating from url
-  useEffect(() => {
-    if (searchPath !== undefined) {
-      setViewWallet(searchPath);
-    }
-  }, [searchPath]);
 
   // helper to check whether valid transaction
   function isValidTxHash(addr: string) {
@@ -44,11 +39,11 @@ export default function WalletPage(props: any) {
   }
   // Get Transaction Data
   useEffect(() => {
-    if (!ethers.utils.isAddress(viewWallet) && !isValidTxHash(viewWallet)) {
+    if (!ethers.utils.isAddress(viewWallet as string)) {
       return;
     }
 
-    const searchterm = viewWallet;
+    const searchterm = viewWallet as string;
     let url;
     if (isValidTxHash(searchterm)) {
       console.log("getting single txn for: ", viewWallet);
@@ -142,19 +137,11 @@ export default function WalletPage(props: any) {
             <p className="text-2xl font-bold">
               {" "}
               {Object.keys(nameLookup).length > 0
-                ? nameLookup[viewWallet.toLowerCase()]
-                : shortenAddress(viewWallet)}
+                ? nameLookup[(viewWallet as string).toLowerCase()]
+                : shortenAddress((viewWallet as string))}
             </p>
             <p className="mb-4 text-xs text-gray-400 ">{viewWallet}</p>
-
-            <div className="flex items-center mb-2 overflow-auto rounded-xl">
-              <Blockies
-                seed={viewWallet?.toString().toLowerCase()}
-                scale={11}
-                size={8}
-              />
-            </div>
-
+                <Avatar wallet={viewWallet}/>
             <button
               className="px-6 py-1 mt-4 text-lg font-bold text-white bg-blue-600 rounded right-1 top-1 hover:bg-blue-700 disabled:opacity-50"
               onClick={() => navigate("/send/" + viewWallet)}

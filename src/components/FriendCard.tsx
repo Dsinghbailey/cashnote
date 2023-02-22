@@ -2,6 +2,7 @@ import React from "react";
 import SmallCard from "./SmallCard";
 import Blockies from "react-blockies";
 import { useNavigate } from "react-router-dom";
+import Avatar from "./Avatar";
 
 const humanizeDuration = require("humanize-duration");
 
@@ -11,10 +12,10 @@ export default function FriendCard(props: any) {
     <SmallCard>
       <div className="flex flex-col items-center justify-center w-full h-full">
         <div className="flex flex-row items-center justify-between w-full h-full">
-          <div className="flex items-center overflow-auto cursor-pointer rounded-xl"
+          <div 
            onClick={() => navigate("/wallet/" + props.address)}
           >
-            <Blockies seed={props.address.toLowerCase()} scale={11} size={8} />
+            <Avatar wallet={props.address} />
           </div>
           <div className="flex flex-col justify-center h-full">
             <button className="px-6 py-1 mb-2 text-lg font-bold text-white bg-blue-600 rounded right-1 top-1 hover:bg-blue-700 disabled:opacity-50"

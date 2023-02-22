@@ -25,7 +25,7 @@ function App() {
                 <Route index={true} element={<HomePage />} />
                 <Route path="send" element={<HomePage />} />
                 <Route path="send/:searchPath" element={<SendingPage />} />
-                <Route path="wallet/:searchPath" element={<WalletPage />} />
+                <Route path="wallet/:viewWallet" element={<WalletPage />} />
                 <Route path="txn/:searchPath/sent" element={<TxnPage txnSent={true} />} />
                 <Route path="txn/:searchPath" element={<TxnPage txnSent={false} />} />
                 <Route path="*" element={<HomePage />} />

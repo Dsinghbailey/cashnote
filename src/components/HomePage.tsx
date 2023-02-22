@@ -15,13 +15,13 @@ export interface Friend {
 }
 
 export default function HomePage() {
-  const { isConnected, address: wagmiAdress } = useAccount();
+  const { isConnected, address: wagmiAddress } = useAccount();
   const { data: signer } = useSigner();
   const [Friends, setFriends] = useState<Friend[]>([]);
 
   useEffect(() => {
       if (isConnected && signer) {
-        const url = `https://api.etherscan.io/api?module=account&action=txlist&address=${wagmiAdress}&sort=desc&apikey=${process.env.REACT_APP_ETHERSCAN_KEY}`;
+        const url = `https://api.etherscan.io/api?module=account&action=txlist&address=${wagmiAddress}&sort=desc&apikey=${process.env.REACT_APP_ETHERSCAN_KEY}`;
         fetch(url)
           .then((response) => response.json())
           .then(async (data) => {
@@ -43,7 +43,7 @@ export default function HomePage() {
               let tempFriends: Friend[] = [];
               addresses.forEach((address: unknown, index: number ) => {
                 address = String(address);
-                if (wagmiAdress?.toLowerCase() === (address as string).toLowerCase()) {
+                if (wagmiAddress?.toLowerCase() === (address as string).toLowerCase()) {
                   return;
                 }
                 const ensName = ensNames[index];
@@ -65,7 +65,7 @@ export default function HomePage() {
             setFriends([]);
           });
       }
-  }, [isConnected, signer, wagmiAdress]);
+  }, [isConnected, signer, wagmiAddress]);
   
   return (
     <>
