@@ -8,6 +8,8 @@ import ConnectPage from "./components/ConnectPage";
 import HomePage from "./components/HomePage";
 import SendingPage from "./components/SendingPage";
 import TxnPage from "./components/TxnPage";
+import Footer from "./components/Footer";
+import AboutPage from "./components/AboutPage";
 
 function App() {
   const { isConnected, address } = useAccount();
@@ -22,6 +24,7 @@ function App() {
             <Routes>
               <Route path="/">
                 <Route index={true} element={<HomePage />} />
+                <Route path="about" element={<AboutPage />} />
                 <Route path="send" element={<HomePage />} />
                 <Route path="send/:searchPath" element={<SendingPage />} />
                 <Route path="wallet/:viewWallet" element={<WalletPage />} />
@@ -36,6 +39,7 @@ function App() {
                 <Route path="*" element={<HomePage />} />
               </Route>
             </Routes>
+            <Footer />
           </>
         ) : (
           <>
@@ -47,8 +51,10 @@ function App() {
               />
               <Route path="/wallet/undefined" element={<ConnectPage />} />
               <Route path="wallet/:viewWallet" element={<WalletPage />} />
+              <Route path="about" element={<AboutPage />} />
               <Route path="*" element={<ConnectPage />} />
             </Routes>
+            <Footer />
           </>
         )}
       </BrowserRouter>
