@@ -70,7 +70,7 @@ export default function HomePage() {
   
   return (
     <>
-      <div className="pt-4 pb-8 bg-blue-600">
+      <div className="pb-8 bg-blue-600">
         <SearchCard />
       </div>
       <div className="pt-4">

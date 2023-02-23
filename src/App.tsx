@@ -20,41 +20,50 @@ function App() {
       <BrowserRouter>
         {isConnected ? (
           <>
-            <NavBar />
-            <Routes>
-              <Route path="/">
-                <Route index={true} element={<HomePage />} />
-                <Route path="about" element={<AboutPage />} />
-                <Route path="send" element={<HomePage />} />
-                <Route path="send/:searchPath" element={<SendingPage />} />
-                <Route path="wallet/:viewWallet" element={<WalletPage />} />
-                <Route
-                  path="txn/:searchPath/sent"
-                  element={<TxnPage txnSent={true} />}
-                />
-                <Route
-                  path="txn/:searchPath"
-                  element={<TxnPage txnSent={false} />}
-                />
-                <Route path="*" element={<HomePage />} />
-              </Route>
-            </Routes>
-            <Footer />
+            <div className="flex flex-col min-h-[100vh] justify-between">
+              <div className="flex flex-col">
+                <NavBar />
+
+                <Routes>
+                  <Route path="/">
+                    <Route index={true} element={<HomePage />} />
+                    <Route path="about" element={<AboutPage />} />
+                    <Route path="send" element={<HomePage />} />
+                    <Route path="send/:searchPath" element={<SendingPage />} />
+                    <Route path="wallet/:viewWallet" element={<WalletPage />} />
+                    <Route
+                      path="txn/:searchPath/sent"
+                      element={<TxnPage txnSent={true} />}
+                    />
+                    <Route
+                      path="txn/:searchPath"
+                      element={<TxnPage txnSent={false} />}
+                    />
+                    <Route path="*" element={<HomePage />} />
+                  </Route>
+                </Routes>
+              </div>
+              <Footer />
+            </div>
           </>
         ) : (
           <>
-            <NavBar />
-            <Routes>
-              <Route
-                path="txn/:searchPath"
-                element={<TxnPage txnSent={false} />}
-              />
-              <Route path="/wallet/undefined" element={<ConnectPage />} />
-              <Route path="wallet/:viewWallet" element={<WalletPage />} />
-              <Route path="about" element={<AboutPage />} />
-              <Route path="*" element={<ConnectPage />} />
-            </Routes>
-            <Footer />
+            <div className="flex flex-col min-h-[100vh] justify-between">
+              <div className="flex flex-col">
+                <NavBar />
+                <Routes>
+                  <Route
+                    path="txn/:searchPath"
+                    element={<TxnPage txnSent={false} />}
+                  />
+                  <Route path="/wallet/undefined" element={<ConnectPage />} />
+                  <Route path="wallet/:viewWallet" element={<WalletPage />} />
+                  <Route path="about" element={<AboutPage />} />
+                  <Route path="*" element={<ConnectPage />} />
+                </Routes>
+              </div>
+              <Footer />
+            </div>
           </>
         )}
       </BrowserRouter>
