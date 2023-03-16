@@ -1,6 +1,6 @@
 # Cashnote
 
-Hi! This is a side project of mine. Thanks for checking it out!
+Hi! This is a side project of mine. Thanks for checking it out!    
 It's available at https://Cashnote.xyz
 
 Cashnote is the new social payments crypto app that's aiming to become the Venmo of Web3. With Cashnote, you can send and receive payments easily and securely using cryptocurrencies and digital assets. But what sets us apart is our unique feature of attaching notes and comments to transactions. You can now add a personal touch to your payments by leaving messages for your frens, and all of these notes and comments are recorded on the blockchain for transparency and traceability.
