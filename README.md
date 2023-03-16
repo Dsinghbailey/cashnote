@@ -6,7 +6,6 @@ Cashnote is the new social payments crypto app that's aiming to become the Venmo
 
 Cashnote also includes Ens names and avatars, so you can easily recognize which wallet you are messaging. Plus, our user-friendly interface makes it super easy to manage your account and view notes sent to you and your frens. Sending Notes on Cashnote is really fun and easy and we're confident it improves on the previous experience of sending notes on the blockchain (referenced in this [answer](https://ethereum.stackexchange.com/a/2469)). We have no backend, no smart contracts, and no fees.
 
-Current plans for the future:
-Add layer 2 support
-More wallet information on profiles
-Go open source
+Current plans for the future:    
+Add layer 2 support.   
+More wallet information on profiles.   
