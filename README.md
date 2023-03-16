@@ -1,46 +1,12 @@
-# Getting Started with Create React App
+# Cashnote
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Hi! This is a side project of mine. Thanks for checking it out!
 
-## Available Scripts
+Cashnote is the new social payments crypto app that's aiming to become the Venmo of Web3. With Cashnote, you can send and receive payments easily and securely using cryptocurrencies and digital assets. But what sets us apart is our unique feature of attaching notes and comments to transactions. You can now add a personal touch to your payments by leaving messages for your frens, and all of these notes and comments are recorded on the blockchain for transparency and traceability.
 
-In the project directory, you can run:
+Cashnote also includes Ens names and avatars, so you can easily recognize which wallet you are messaging. Plus, our user-friendly interface makes it super easy to manage your account and view notes sent to you and your frens. Sending Notes on Cashnote is really fun and easy and we're confident it improves on the previous experience of sending notes on the blockchain (referenced in this [answer](https://ethereum.stackexchange.com/a/2469)). We have no backend, no smart contracts, and no fees.
 
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Current plans for the future:
+Add layer 2 support
+More wallet information on profiles
+Go open source
