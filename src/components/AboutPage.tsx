@@ -68,7 +68,6 @@ export default function AboutPage() {
               <ul className="ml-4 list-disc">
                 <li> Add layer 2 support</li>
                 <li>More wallet information on profiles</li>
-                <li> Go open source </li>
               </ul>
               <br />
               P.S. While you're here come check out <a href="https://nftychat.xyz" className="text-blue-700">nftychat.xyz</a>, a decentralized chat platform and my main project.
