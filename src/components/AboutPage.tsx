@@ -55,11 +55,11 @@ export default function AboutPage() {
               previous experience of sending notes on the blockchain (referenced
               in this{" "}
               <a
-                href="https://dame.mirror.xyz/5xbwbVzWcO8vQkEIGlMaUjXNM6UNM8labiN-5QkVCHM"
+                href="https://ethereum.stackexchange.com/questions/2466/how-do-i-send-an-arbitary-message-to-an-ethereum-address/2469#2469"
                 rel="noopener noreferrer"
                 className="text-blue-600 hover:text-blue-800"
               >
-                article
+                answer
               </a>
               ). We have no backend, no smart contracts, and no fees.
               <br />
